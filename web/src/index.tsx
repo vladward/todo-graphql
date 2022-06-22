@@ -1,11 +1,18 @@
+import './index.css';
+
+import { ApolloProvider } from '@apollo/client';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import {App} from './App';
+import { BrowserRouter } from 'react-router-dom';
 
-const root = ReactDOM.createRoot(
-    document.getElementById('root') as HTMLElement
-);
+import { App } from './App';
+import { client } from './graphql/client';
+
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
-    <App/>
+  <ApolloProvider client={client}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </ApolloProvider>,
 );
