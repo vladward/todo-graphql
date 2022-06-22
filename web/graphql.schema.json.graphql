@@ -1,0 +1,52 @@
+# This file was generated based on "graphql.schema.json". Do not edit manually.
+
+schema {
+    query: Query
+    mutation: Mutation
+    subscription: Subscription
+}
+
+type Mutation {
+    createTodo(data: CreateTodoInputDto!): Todo!
+    editTodo(data: EditTodoInputDto!): Todo!
+    removeTodo(id: ID!): Todo!
+}
+
+type Query {
+    todo(id: ID!): Todo!
+    todos(data: GetTodosInputDto!): todos!
+}
+
+type Subscription {
+    removeTodo: Todo!
+    updatedTodo: Todo!
+}
+
+type Todo {
+    completed: Boolean!
+    description: String!
+    id: ID!
+    title: String!
+}
+
+type todos {
+    edges: [Todo!]!
+    total: Float!
+}
+
+input CreateTodoInputDto {
+    description: String!
+    title: String!
+}
+
+input EditTodoInputDto {
+    completed: Boolean
+    description: String
+    id: ID!
+    title: String
+}
+
+input GetTodosInputDto {
+    limit: Float = 10.0
+    skip: Float = 0.0
+}
