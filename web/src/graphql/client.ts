@@ -1,11 +1,9 @@
-import { ApolloClient, ApolloLink, InMemoryCache, split } from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
+import { ApolloClient, ApolloLink, InMemoryCache } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
-import { getMainDefinition } from '@apollo/client/utilities';
 import { createUploadLink } from 'apollo-upload-client';
 import create from 'zustand';
 
-import { API_HOST } from '../constants/constants';
+import { API_HOST } from '../constants';
 
 type ErrorType = {
   hasError: boolean;
@@ -45,25 +43,14 @@ const httpLink = createUploadLink({
   uri: API_HOST,
 });
 
-const splitLink = split(({ query }) => {
-  const definition = getMainDefinition(query);
-  return (
-    definition.kind === 'OperationDefinition' && definition.operation === 'subscription'
-  );
-}, httpLink);
-
-const authLink = setContext((_, { headers }) => {
-  const token = sessionStorage.getItem('token') || localStorage.getItem('token');
-
-  return {
-    headers: {
-      ...headers,
-      authorization: token ? `Bearer ${token}` : '',
-    },
-  };
-});
+// const splitLink = split(({ query }) => {
+//   const definition = getMainDefinition(query);
+//   return (
+//     definition.kind === 'OperationDefinition' && definition.operation === 'subscription'
+//   );
+// }, httpLink);
 
 export const client = new ApolloClient({
-  link: ApolloLink.from([errorLink, authLink, splitLink]),
+  link: ApolloLink.from([errorLink, httpLink]),
   cache: new InMemoryCache(),
 });
