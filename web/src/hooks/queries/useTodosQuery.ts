@@ -1,10 +1,12 @@
+import { useSearchContext } from '../../context';
 import * as generated from '../../graphql/generated/graphql';
 
-export const useTodosQuery = ({ ...options }) => {
+export const useTodosQuery = () => {
+  const { debouncedValue } = useSearchContext();
   return generated.useTodosQuery({
     variables: {
       data: {
-        ...options,
+        title: debouncedValue,
         limit: 100,
       },
     },
