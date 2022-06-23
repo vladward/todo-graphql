@@ -1,0 +1,9 @@
+.customInput {
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+.customInput__error {
+    height: 20px;
+}
