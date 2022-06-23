@@ -1,12 +1,16 @@
 import './CardActions.css';
 
-import { Edit, Remove } from '../icons';
+import { FC } from 'react';
 
-export const CardActions = () => {
+import { CardType } from '../card/Card';
+import { EditTodo } from '../editTodo/EditTodo';
+import { RemoveTodo } from '../removeTodo/RemoveTodo';
+
+export const CardActions: FC<CardType> = ({ id, completed, description, title }) => {
   return (
     <div className='actions'>
-      <Edit />
-      <Remove />
+      <EditTodo id={id} completed={completed} description={description} title={title} />
+      <RemoveTodo id={id} />
     </div>
   );
 };
