@@ -1,2 +1,2 @@
-export * from './Edit';
-export * from './Remove';
+export * from './editIcon/EditIcon';
+export * from './removeIcon/RemoveIcon';

@@ -5,13 +5,17 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import UIkit from 'uikit';
 import Icons from 'uikit/dist/js/uikit-icons';
 
+import { CreateTodo, FindTodo } from '../components';
 import { PATHS, routes } from '../constants';
 
 const RouterWrapper: FC<RouteWrapperType> = ({ children }) => {
   return (
     <div className='wrapper'>
       <h2>{'Your Todos'}</h2>
-      <aside />
+      <aside>
+        <CreateTodo />
+        <FindTodo />
+      </aside>
       <div className='content'>
         <div className='uk-margin-small uk-flex uk-flex-center uk-margin-remove'>
           {children}
@@ -39,7 +43,7 @@ export const Navigation = () => {
           />
         );
       })}
-      <Route path={'*'} element={<Navigate replace to={PATHS.home} />} />
+      <Route path={'*'} element={<Navigate replace to={PATHS.todolists} />} />
     </Routes>
   );
 };

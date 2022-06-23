@@ -35,6 +35,7 @@ export type EditTodoInputDto = {
 export type GetTodosInputDto = {
   limit?: InputMaybe<Scalars['Float']>;
   skip?: InputMaybe<Scalars['Float']>;
+  title?: InputMaybe<Scalars['String']>;
 };
 
 export type Mutation = {

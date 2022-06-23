@@ -1,7 +1,6 @@
 .actions {
-    position: absolute;
-    top: 10px;
-    left: 40%;
+    display: flex;
+    justify-content: center;
 }
 
 span {
