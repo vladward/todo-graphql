@@ -44,7 +44,7 @@ export class TodosResolver {
 
   @Mutation(() => Todo)
   async editTodo(@Args('data') data: EditTodoInputDto) {
-    const todo = await this.todosService.createTodo(data);
+    const todo = await this.todosService.editTodo(data);
 
     pubSub.publish('updatedTodo', { todo });
 
