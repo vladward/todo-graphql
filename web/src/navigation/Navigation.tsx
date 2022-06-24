@@ -11,13 +11,13 @@ import { PATHS, routes } from '../constants';
 const RouterWrapper: FC<RouteWrapperType> = ({ children }) => {
   return (
     <div className='wrapper'>
-      <h2>{'Your Todos'}</h2>
+      <h3 className='uk-background-primary'>{'Your Todos'}</h3>
       <aside>
         <CreateTodo />
         <FindTodo />
       </aside>
       <div className='content'>
-        <div className='uk-margin-small uk-flex uk-flex-center uk-margin-remove'>
+        <div className='uk-margin-small uk-flex uk-flex-column uk-flex-center uk-margin-remove'>
           {children}
         </div>
       </div>
