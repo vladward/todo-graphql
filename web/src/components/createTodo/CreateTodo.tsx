@@ -41,8 +41,12 @@ export const CreateTodo = () => {
         >
           <Form>
             <div className='uk-section uk-width-large uk-section-default uk-section-large uk-padding-large uk-flex uk-flex-column uk-flex-center'>
-              <CustomInput name='title' placeholder='Enter todo name' />
-              <CustomInput name='description' placeholder='Enter todo description' />
+              <CustomInput name='title' placeholder='Enter todo name' isFind={false} />
+              <CustomInput
+                name='description'
+                placeholder='Enter todo description'
+                isFind={false}
+              />
               <CustomButton
                 type='submit'
                 text='Create'

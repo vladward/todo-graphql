@@ -1,7 +1,7 @@
 import './CustomInput.css';
 
 import { useField } from 'formik';
-import React, { ChangeEvent, FC } from 'react';
+import React, { FC } from 'react';
 
 import { useSearchContext } from '../../context';
 
@@ -12,9 +12,12 @@ export const CustomInput: FC<CustomInputType> = ({
   disabled = false,
   label,
   id,
+  isFind = false,
 }) => {
-  const [field, meta] = useField(name);
   const { searchValue, setSearchValue } = useSearchContext();
+
+  const [field, meta] = useField(name);
+
   const hasError = Boolean(meta.error && meta.touched);
   return (
     <div className='uk-margin-small-bottom'>
@@ -28,8 +31,8 @@ export const CustomInput: FC<CustomInputType> = ({
         className={type === 'checkbox' ? 'uk-checkbox' : 'uk-search-input customInput'}
         type={type}
         name={name}
-        value={searchValue || field.value}
-        onChange={(e) => setSearchValue(e.currentTarget.value) || field.onChange}
+        value={isFind ? searchValue : field.value}
+        onChange={isFind ? (e) => setSearchValue(e.currentTarget.value) : field.onChange}
         placeholder={placeholder}
         disabled={disabled}
       />
@@ -47,6 +50,6 @@ type CustomInputType = {
   type?: string;
   disabled?: boolean;
   id?: string;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   value?: string;
+  isFind?: boolean;
 };
