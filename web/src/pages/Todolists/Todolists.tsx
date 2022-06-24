@@ -2,17 +2,23 @@ import './Todolists.css';
 
 import { FC } from 'react';
 
-import { Card } from '../../components';
+import { Card, Pagination } from '../../components';
 import { Todo } from '../../graphql/generated/graphql';
-import { useTodosQuery } from '../../hooks/queries';
+import { usePagination } from '../../hooks';
 
 export const Todolists: FC = () => {
-  const { data } = useTodosQuery();
+  const { postsPerPage, posts, paginate, currentPosts, currentPage } = usePagination();
 
   return (
-    <div className='uk-padding-small'>
-      <div className='uk-flex uk-flex-wrap uk-flex-wrap-around uk-flex-between uk-padding-small'>
-        {data?.todos.edges.map((edge: Todo) => {
+    <div>
+      <Pagination
+        postsPerPage={postsPerPage}
+        totalPosts={posts?.length}
+        paginate={paginate}
+        currentPage={currentPage}
+      />
+      <div className='uk-flex uk-child-width-1-4 uk-flex-wrap uk-flex-wrap-around uk-flex-center'>
+        {currentPosts?.map((edge: Todo) => {
           const { id, title, description, completed } = edge;
 
           return (

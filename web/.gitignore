@@ -7,6 +7,7 @@
 
 #editor
 .idea
+.xml
 
 # testing
 /coverage
