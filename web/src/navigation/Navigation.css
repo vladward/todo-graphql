@@ -3,18 +3,17 @@
   grid-template-areas:
           "h h"
           "a c";
-  grid-template-rows: 100px 2fr;
+  grid-template-rows: 50px 2fr;
   grid-template-columns: 300px 1fr;
   height: 100vh;
 }
 
-h2 {
+h3 {
   display: flex;
   align-items: center;
   justify-content: center;
   grid-area: h;
-  background-color: #506db0;
-  padding: 20px;
+  padding: 10px;
   margin: 0;
   color: white;
 }
@@ -24,6 +23,10 @@ aside {
   background-color: gray;
   color: white;
   text-align: center;
+}
+
+aside h2 {
+  color: white;
 }
 
 .content {
