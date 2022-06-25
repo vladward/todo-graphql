@@ -8,10 +8,6 @@ export const usePagination = () => {
 
   const { debouncedValue } = useSearchContext();
 
-  useEffect(() => {
-    if (debouncedValue) setCurrentPage(1);
-  }, [debouncedValue]);
-
   const posts = data?.todos.edges;
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -25,6 +21,14 @@ export const usePagination = () => {
   const currentPosts = data?.todos?.edges.slice(indexOfFirstPost, indexOfLastPost);
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+
+  useEffect(() => {
+    if (debouncedValue) setCurrentPage(1);
+  }, [debouncedValue]);
+
+  useEffect(() => {
+    if (currentPosts?.length === 0) return paginate(currentPage - 1);
+  }, [currentPosts, currentPage]);
 
   return { currentPosts, postsPerPage, posts, paginate, currentPage };
 };

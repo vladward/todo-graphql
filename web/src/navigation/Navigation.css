@@ -21,12 +21,7 @@ h3 {
 aside {
   grid-area: a;
   background-color: gray;
-  color: white;
   text-align: center;
-}
-
-aside h2 {
-  color: white;
 }
 
 .content {
