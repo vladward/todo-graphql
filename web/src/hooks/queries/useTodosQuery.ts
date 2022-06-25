@@ -7,7 +7,7 @@ export const useTodosQuery = () => {
     variables: {
       data: {
         title: debouncedValue,
-        limit: 100,
+        limit: 200,
       },
     },
   });

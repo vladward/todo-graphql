@@ -36,7 +36,9 @@ export class TodosService {
   async editTodo(data: EditTodoInputDto) {
     const { id, ...update } = data;
 
-    return this.todoModel.findByIdAndUpdate(id, update);
+    return this.todoModel.findByIdAndUpdate(id, update, {
+      new: true,
+    });
   }
 
   removeTodo(id: Types.ObjectId) {
