@@ -1,4 +1,4 @@
-import { Form, Formik } from 'formik';
+import { Field, Form, Formik } from 'formik';
 import React, { FC, useState } from 'react';
 
 import { useEditTodoMutation } from '../../hooks/mutations';
@@ -25,8 +25,8 @@ export const EditTodo: FC<CardType> = ({ id, title, completed, description }) =>
           data: {
             id: id,
             title: values.title,
-            description: values.description || '',
-            completed: values.completed || false,
+            description: values.description,
+            completed: values.completed,
           },
         },
       });
@@ -37,7 +37,7 @@ export const EditTodo: FC<CardType> = ({ id, title, completed, description }) =>
       <EditIcon onClick={handleOpenModal} />
       <Modal isOpen={isOpen} onClose={handleCloseModal}>
         <Formik
-          initialValues={{ title, description, completed }}
+          initialValues={{ title: title, description: description, completed: completed }}
           onSubmit={handleEditTodo}
           validationSchema={editTodoSchema}
         >
@@ -45,15 +45,13 @@ export const EditTodo: FC<CardType> = ({ id, title, completed, description }) =>
             <div className='uk-section uk-width-large uk-section-default uk-section-large uk-padding-large uk-flex uk-flex-column uk-flex-center'>
               <CustomInput name='title' placeholder='Enter todo name' />
               <CustomInput name='description' placeholder='Enter todo description' />
-              <CustomInput
-                name='completed'
-                type='checkbox'
-                label='Status'
-                id='completed'
-              />
+              <div>
+                <label htmlFor='completed'>Status</label>
+                <Field id='completed' type='checkbox' name='completed' />
+              </div>
               <CustomButton
                 type='submit'
-                text='Create'
+                text='Submit'
                 className='uk-button uk-button-primary uk-width-1-1 uk-margin-medium-top'
               />
             </div>

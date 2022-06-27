@@ -5,17 +5,14 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import UIkit from 'uikit';
 import Icons from 'uikit/dist/js/uikit-icons';
 
-import { CreateTodo, FindTodo } from '../components';
+import { SideMenu } from '../components';
 import { PATHS, routes } from '../constants';
 
 const RouterWrapper: FC<RouteWrapperType> = ({ children }) => {
   return (
     <div className='wrapper'>
       <h3 className='uk-background-primary'>{'Your Todos'}</h3>
-      <aside>
-        <CreateTodo />
-        <FindTodo />
-      </aside>
+      <SideMenu />
       <div className='content'>
         <div className='uk-margin-small uk-flex uk-flex-column uk-flex-center uk-margin-remove'>
           {children}
@@ -31,6 +28,7 @@ export const Navigation = () => {
     <Routes>
       {routes.map((route, index) => {
         const { component: Component, path } = route;
+
         return (
           <Route
             key={route.path + index}

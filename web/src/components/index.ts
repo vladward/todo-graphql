@@ -11,3 +11,4 @@ export * from './findTodo/FindTodo';
 export * from './modal/Modal';
 export * from './pagination/Pagination';
 export * from './removeTodo/RemoveTodo';
+export * from './sideMenu/SideMenu';

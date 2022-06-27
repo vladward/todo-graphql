@@ -37,7 +37,7 @@ export class TodosResolver {
   async createTodo(@Args('data') data: CreateTodoInputDto) {
     const todo = await this.todosService.createTodo(data);
 
-    pubSub.publish('updatedTodo', { todo });
+    pubSub.publish('createTodo', { todo });
 
     return todo;
   }
