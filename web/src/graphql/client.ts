@@ -52,5 +52,24 @@ const httpLink = createUploadLink({
 
 export const client = new ApolloClient({
   link: ApolloLink.from([errorLink, httpLink]),
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    typePolicies: {
+      Query: {
+        fields: {
+          todos: {
+            keyArgs: false,
+            merge(existing: any, incoming: any) {
+              const prevEdges = existing?.edges || [];
+              const incomingEdges = incoming?.edges || [];
+
+              return {
+                ...incoming,
+                edges: [...prevEdges, ...incomingEdges],
+              };
+            },
+          },
+        },
+      },
+    },
+  }),
 });

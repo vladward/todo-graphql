@@ -1,19 +1,42 @@
 .pagination {
     display: flex;
-    justify-content: flex-end;
-    margin: 5px;
+    justify-content: center;
+    margin: 25px 10px 10px 10px;
 }
 
-.pagination a {
+.paginationButton {
     color: black;
     float: left;
     padding: 10px 20px;
     text-decoration: none;
 }
 
-.pagination a.active {
+.paginationButton, .active {
     background-color: #1e87f0;
     color: white;
 }
 
-.pagination a:hover:not(.active) {background-color: #ddd;}
+.paginationButtonDisabled {
+    color: black;
+    float: left;
+    padding: 10px 20px;
+    text-decoration: none;
+}
+
+.paginationButtonDisabled, .active {
+    background-color: #1e87f0;
+    color: white;
+}
+
+.pagination .paginationButton:hover:not(.active) {
+    background-color: #ddd;
+    text-decoration: none;
+    color: black;
+}
+
+.pagination .paginationButtonDisabled:hover:not(.active) {
+    padding: 10px 20px;
+    background-color: #ddd;
+    text-decoration: none;
+    color: gray;
+}
