@@ -1,29 +1,47 @@
 import './Todolists.css';
 
-import { FC } from 'react';
+import { FC, useRef } from 'react';
 
 import { Card, Pagination } from '../../components';
 import { Todo } from '../../graphql/generated/graphql';
-import { usePagination } from '../../hooks';
+import { useTodosQuery } from '../../hooks/queries';
 
 export const Todolists: FC = () => {
-  const { postsPerPage, posts, paginate, currentPosts, currentPage } = usePagination();
+  const ref = useRef(0);
+
+  const { data, fetchMore, variables } = useTodosQuery({});
+
+  const handleFetchMore = async () => {
+    if (data?.todos.total && variables?.data.limit) {
+      ref.current += 8;
+      await fetchMore({
+        variables: {
+          data: {
+            skip: ref.current,
+            limit: 4,
+          },
+        },
+      });
+    }
+  };
+
+  const totalTodos = Number(data?.todos.total) / 2;
+
+  let showMore = true;
+
+  if (Number(data?.todos.edges.length) >= totalTodos) {
+    showMore = false;
+  }
 
   return (
     <div>
-      <Pagination
-        postsPerPage={postsPerPage}
-        totalPosts={posts?.length}
-        paginate={paginate}
-        currentPage={currentPage}
-      />
       <div className='uk-flex uk-child-width-1-4 uk-flex-wrap uk-flex-wrap-around uk-flex-center'>
-        {currentPosts?.map((edge: Todo) => {
+        {data?.todos.edges?.map((edge: Todo, index) => {
           const { id, title, description, completed } = edge;
 
           return (
             <Card
-              key={id + title}
+              key={id + title + description + index}
               title={title}
               id={id}
               description={description}
@@ -32,6 +50,7 @@ export const Todolists: FC = () => {
           );
         })}
       </div>
+      <Pagination showMore={showMore} handleFetchMore={handleFetchMore} />
     </div>
   );
 };

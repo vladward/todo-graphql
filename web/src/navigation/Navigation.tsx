@@ -12,11 +12,9 @@ const RouterWrapper: FC<RouteWrapperType> = ({ children }) => {
   return (
     <div className='wrapper'>
       <h3 className='uk-background-primary'>{'Your Todos'}</h3>
-      <SideMenu />
       <div className='content'>
-        <div className='uk-margin-small uk-flex uk-flex-column uk-flex-center uk-margin-remove'>
-          {children}
-        </div>
+        <SideMenu />
+        {children}
       </div>
     </div>
   );

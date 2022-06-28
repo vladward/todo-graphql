@@ -16,6 +16,8 @@ const SearchProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
   const { debouncedValue, isDebouncing } = useDebounce(searchValue);
 
+  // console.log(searchValue);
+
   return (
     <SearchContext.Provider
       value={{

@@ -10,7 +10,7 @@ import { CardStatus } from '../cardStatus/CardStatus';
 export const Card: FC<CardType> = ({ completed, description, title, id }) => {
   return (
     <div className='card'>
-      <div className='uk-width-medium uk-card uk-margin-medium uk-margin-small-right uk-margin-small-left uk-padding-small uk-card-default uk-card-body uk-card-hover'>
+      <div className='uk-width-medium uk-card uk-margin-medium uk-margin-small-right uk-margin-small-left uk-margin-small-top uk-margin-remove-bottom uk-padding-small uk-card-default uk-card-body uk-card-hover'>
         <CardHeader title={title} />
         <CardDescription description={description} />
         <CardStatus completed={completed} />
