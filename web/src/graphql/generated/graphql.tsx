@@ -73,7 +73,7 @@ export type QueryTodosArgs = {
 
 export type Subscription = {
   __typename?: 'Subscription';
-  removeTodo: Todo;
+  removedTodo: Todo;
   updatedTodo: Todo;
 };
 
@@ -175,6 +175,32 @@ export type TodosQuery = {
       description: string;
       completed: boolean;
     }>;
+  };
+};
+
+export type RemovedTodoSubscriptionVariables = Exact<{ [key: string]: never }>;
+
+export type RemovedTodoSubscription = {
+  __typename?: 'Subscription';
+  removedTodo: {
+    __typename: 'Todo';
+    id: string;
+    title: string;
+    description: string;
+    completed: boolean;
+  };
+};
+
+export type UpdatedTodoSubscriptionVariables = Exact<{ [key: string]: never }>;
+
+export type UpdatedTodoSubscription = {
+  __typename?: 'Subscription';
+  updatedTodo: {
+    __typename: 'Todo';
+    id: string;
+    title: string;
+    description: string;
+    completed: boolean;
   };
 };
 
@@ -411,3 +437,85 @@ export function useTodosLazyQuery(
 export type TodosQueryHookResult = ReturnType<typeof useTodosQuery>;
 export type TodosLazyQueryHookResult = ReturnType<typeof useTodosLazyQuery>;
 export type TodosQueryResult = Apollo.QueryResult<TodosQuery, TodosQueryVariables>;
+export const RemovedTodoDocument = gql`
+  subscription removedTodo {
+    removedTodo {
+      ...TodoFragment
+    }
+  }
+  ${TodoFragmentFragmentDoc}
+`;
+
+/**
+ * __useRemovedTodoSubscription__
+ *
+ * To run a query within a React component, call `useRemovedTodoSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useRemovedTodoSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useRemovedTodoSubscription({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useRemovedTodoSubscription(
+  baseOptions?: Apollo.SubscriptionHookOptions<
+    RemovedTodoSubscription,
+    RemovedTodoSubscriptionVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSubscription<
+    RemovedTodoSubscription,
+    RemovedTodoSubscriptionVariables
+  >(RemovedTodoDocument, options);
+}
+export type RemovedTodoSubscriptionHookResult = ReturnType<
+  typeof useRemovedTodoSubscription
+>;
+export type RemovedTodoSubscriptionResult =
+  Apollo.SubscriptionResult<RemovedTodoSubscription>;
+export const UpdatedTodoDocument = gql`
+  subscription updatedTodo {
+    updatedTodo {
+      ...TodoFragment
+    }
+  }
+  ${TodoFragmentFragmentDoc}
+`;
+
+/**
+ * __useUpdatedTodoSubscription__
+ *
+ * To run a query within a React component, call `useUpdatedTodoSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useUpdatedTodoSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useUpdatedTodoSubscription({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useUpdatedTodoSubscription(
+  baseOptions?: Apollo.SubscriptionHookOptions<
+    UpdatedTodoSubscription,
+    UpdatedTodoSubscriptionVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSubscription<
+    UpdatedTodoSubscription,
+    UpdatedTodoSubscriptionVariables
+  >(UpdatedTodoDocument, options);
+}
+export type UpdatedTodoSubscriptionHookResult = ReturnType<
+  typeof useUpdatedTodoSubscription
+>;
+export type UpdatedTodoSubscriptionResult =
+  Apollo.SubscriptionResult<UpdatedTodoSubscription>;

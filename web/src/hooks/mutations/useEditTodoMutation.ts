@@ -12,12 +12,16 @@ export const useEditTodoMutation = (handleCloseModal: () => void) => {
             id: cache.identify(data.editTodo),
             fragment: TODO_FRAGMENT,
           },
-          (data) => ({
-            ...data,
-            title: data.title,
-            description: data.description,
-            completed: data.completed,
-          }),
+          (data) => {
+            if (data) {
+              return {
+                ...data,
+                title: data.title,
+                description: data.description,
+                completed: data.completed,
+              };
+            }
+          },
         );
       }
     },

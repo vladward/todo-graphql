@@ -12,15 +12,28 @@ export const useRemoveTodoMutation = () => {
       const removeTodoId = data.removeTodo.id;
 
       cache.updateQuery(
-        { query: TODOS, variables: { data: { limit: 200, title: '' } } },
+        {
+          query: TODOS,
+          variables: { data: { limit: 4 } },
+          overwrite: true,
+        },
         (data) => {
-          return {
-            todos: {
-              ...data.todos,
-              total: data.todos.total - 1,
-              edges: data.todos.edges.filter((todo: Todo) => todo.id !== removeTodoId),
-            },
-          };
+          if (data) {
+            console.log(
+              data.todos.edges.filter(
+                (todo: Todo) => String(todo.id) !== String(removeTodoId),
+              ),
+            );
+            return {
+              todos: {
+                ...data.todos,
+                total: data.todos.total,
+                edges: data.todos.edges.filter(
+                  (todo: Todo) => String(todo.id) !== String(removeTodoId),
+                ),
+              },
+            };
+          }
         },
       );
     },

@@ -396,7 +396,7 @@
         "description": null,
         "fields": [
           {
-            "name": "removeTodo",
+            "name": "removedTodo",
             "description": null,
             "args": [],
             "type": {

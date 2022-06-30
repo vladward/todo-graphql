@@ -37,7 +37,7 @@ export class TodosResolver {
   async createTodo(@Args('data') data: CreateTodoInputDto) {
     const todo = await this.todosService.createTodo(data);
 
-    pubSub.publish('createTodo', { todo });
+    pubSub.publish('updatedTodo', { todo });
 
     return todo;
   }
@@ -55,7 +55,7 @@ export class TodosResolver {
   async removeTodo(@Args({ name: 'id', type: () => ID }) id: Types.ObjectId) {
     const todo = await this.todosService.removeTodo(id);
 
-    pubSub.publish('removeTodo', { todo });
+    pubSub.publish('removedTodo', { todo });
 
     return todo;
   }
@@ -71,10 +71,10 @@ export class TodosResolver {
   }
 
   @Subscription(() => Todo, {
-    name: 'removeTodo',
+    name: 'removedTodo',
     resolve: ({ todo }) => todo,
   })
-  async removeTodoSubscription() {
-    return pubSub.asyncIterator('removeTodo');
+  async removedTodoSubscription() {
+    return pubSub.asyncIterator('removedTodo');
   }
 }

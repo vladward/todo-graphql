@@ -10,26 +10,17 @@ export const useCreateTodoMutation = (handleCloseModal: () => void) => {
         //First way
 
         const newTodo = data.createTodo;
-        cache.updateQuery(
-          {
-            query: TODOS,
-            variables: {
-              data: {
-                limit: 200,
-                title: '',
-              },
-            },
-          },
-          (data) => {
+        cache.updateQuery({ query: TODOS }, (data) => {
+          if (data) {
             return {
               todos: {
                 ...data.todos,
-                total: data.todos.total,
+                total: data.todos.total + 1,
                 edges: [...(data.todos.edges || []), newTodo],
               },
             };
-          },
-        );
+          }
+        });
 
         //Second way
 
