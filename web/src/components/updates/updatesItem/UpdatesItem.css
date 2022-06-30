@@ -1,0 +1,16 @@
+.updatesItem {
+    color: white;
+    background-color: #1e87f0;
+    padding: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 5px;
+
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+}
+
+.updatesItem__operation {
+    color: lightgrey;
+}
