@@ -9,8 +9,13 @@ export class TodosService {
   constructor(@InjectModel(Todo.name) private todoModel: Model<TodoDocument>) {}
 
   async getTodos(data: GetTodosInputDto) {
-    const total = await this.todoModel.find().count();
-    const edges = await this.todoModel.find(null, null, { ...data });
+    const total = await this.todoModel.find({
+        ...(data?.title ? { title: {$regex: data.title, $options: 'i'} } : null)
+    }).count();
+
+    const edges = await this.todoModel.find({
+          ...(data?.title ? { title: {$regex: data.title, $options: 'i'} } : null)
+        }, null, { ...data });
 
     return {
       edges,
@@ -31,7 +36,9 @@ export class TodosService {
   async editTodo(data: EditTodoInputDto) {
     const { id, ...update } = data;
 
-    return this.todoModel.findByIdAndUpdate(id, update);
+    return this.todoModel.findByIdAndUpdate(id, update, {
+      new: true,
+    });
   }
 
   removeTodo(id: Types.ObjectId) {

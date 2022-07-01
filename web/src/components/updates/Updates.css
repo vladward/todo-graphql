@@ -1,0 +1,15 @@
+.updates {
+    max-width: 280px;
+    height: 500px;
+    background-color: white;
+    margin: 0 auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.updates p {
+    position: absolute;
+    top: 45%;
+    left: 30%;
+}

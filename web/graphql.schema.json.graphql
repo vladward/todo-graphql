@@ -18,7 +18,7 @@ type Query {
 }
 
 type Subscription {
-    removeTodo: Todo!
+    removedTodo: Todo!
     updatedTodo: Todo!
 }
 
@@ -49,4 +49,5 @@ input EditTodoInputDto {
 input GetTodosInputDto {
     limit: Float = 10.0
     skip: Float = 0.0
+    title: String
 }

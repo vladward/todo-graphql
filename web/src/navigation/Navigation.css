@@ -1,0 +1,25 @@
+.wrapper {
+
+}
+
+h3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  margin: 0;
+  color: white;
+}
+
+aside {
+  background-color: gray;
+  text-align: center;
+  min-width: 300px;
+}
+
+.content {
+  background-color: white;
+  min-height: 100vh;
+  height: 100%;
+  display: flex;
+}

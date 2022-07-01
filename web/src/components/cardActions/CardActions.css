@@ -1,0 +1,16 @@
+.actions {
+    display: flex;
+    justify-content: center;
+}
+
+span {
+    cursor: pointer;
+}
+
+.actions span:first-child:hover {
+    color: green!important;
+}
+
+.actions span:last-child:hover {
+    color: red!important;
+}

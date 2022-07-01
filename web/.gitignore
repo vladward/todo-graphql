@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+.xml
 
 #editor
 .idea
@@ -21,6 +22,7 @@ npm-debug.log*
 pnpm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+yarn.lock
 lerna-debug.log*
 
 # misc
