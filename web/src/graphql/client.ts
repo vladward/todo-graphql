@@ -71,7 +71,7 @@ export const client = new ApolloClient({
         fields: {
           todos: {
             //can take keyArgs if is need
-            // keyArgs: ['limit'],
+            keyArgs: ['skip'],
             merge(existing: any, incoming: any) {
               const prevEdges = existing?.edges || [];
               const incomingEdges = incoming?.edges || [];

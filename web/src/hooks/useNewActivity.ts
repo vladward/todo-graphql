@@ -7,7 +7,7 @@ export const useNewActivity = () => {
   const { data: updateSubscriptionData } = useUpdatedTodoSubscription();
   const { data: removeSubscriptionData } = useRemovedTodoSubscription();
 
-  const [updData, setUpdData] = useState<Array<CardType & { operation: string }>>([]);
+  const [updData, setUpdData] = useState<Array<CardType>>([]);
 
   useEffect(() => {
     if (updateSubscriptionData) {
@@ -18,7 +18,6 @@ export const useNewActivity = () => {
           title: updateSubscriptionData?.updatedTodo.title,
           description: updateSubscriptionData?.updatedTodo.description,
           completed: updateSubscriptionData?.updatedTodo.completed,
-          operation: 'Updated',
         },
       ]);
     }
@@ -33,7 +32,6 @@ export const useNewActivity = () => {
           title: removeSubscriptionData?.removedTodo.title,
           description: removeSubscriptionData?.removedTodo.description,
           completed: removeSubscriptionData?.removedTodo.completed,
-          operation: 'Removed',
         },
       ]);
     }

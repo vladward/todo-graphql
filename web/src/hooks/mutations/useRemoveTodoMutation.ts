@@ -3,8 +3,10 @@ import { toast } from 'react-toastify';
 import * as generated from '../../graphql/generated/graphql';
 import { Todo } from '../../graphql/generated/graphql';
 import { TODOS } from '../../graphql/queries';
+import { useSkip } from '../useSkip';
 
 export const useRemoveTodoMutation = () => {
+  const { ref } = useSkip();
   return generated.useRemoveTodoMutation({
     update(cache, { data }) {
       if (!data) return;
@@ -14,16 +16,11 @@ export const useRemoveTodoMutation = () => {
       cache.updateQuery(
         {
           query: TODOS,
-          variables: { data: { limit: 4 } },
+          variables: { data: { limit: 4, skip: ref.current } },
           overwrite: true,
         },
         (data) => {
           if (data) {
-            console.log(
-              data.todos.edges.filter(
-                (todo: Todo) => String(todo.id) !== String(removeTodoId),
-              ),
-            );
             return {
               todos: {
                 ...data.todos,

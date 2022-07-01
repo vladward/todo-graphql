@@ -1,6 +1,6 @@
 import './Updates.css';
 
-import { useNewActivity } from '../../hooks/useNewActivity';
+import { useNewActivity } from '../../hooks';
 import { UpdatesItem } from './updatesItem/UpdatesItem';
 
 export const Updates = () => {
@@ -17,7 +17,6 @@ export const Updates = () => {
               title={activity?.title}
               description={activity?.description}
               completed={activity?.completed}
-              operation={activity.operation}
             />
           );
         })
