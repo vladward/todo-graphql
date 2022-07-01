@@ -30,7 +30,7 @@ export const CreateTodo = () => {
     <div className='uk-padding-small'>
       <CustomButton
         text='Create todo'
-        className='uk-button uk-button-primary uk-width-1-1 uk-margin-medium-top'
+        className='uk-button uk-button-primary uk-width-1-1 uk-margin-small'
         onClick={handleOpenModal}
       />
       <Modal isOpen={isOpen} onClose={handleCloseModal}>

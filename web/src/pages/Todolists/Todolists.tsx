@@ -1,19 +1,20 @@
 import './Todolists.css';
 
-import { FC, useRef } from 'react';
+import { FC } from 'react';
 
 import { Card, Pagination } from '../../components';
 import { Todo } from '../../graphql/generated/graphql';
+import { useSkip } from '../../hooks';
 import { useTodosQuery } from '../../hooks/queries';
 
 export const Todolists: FC = () => {
-  const ref = useRef(0);
+  const { ref, handleIncrementSkipValue } = useSkip();
 
   const { data, fetchMore, variables } = useTodosQuery({});
 
   const handleFetchMore = async () => {
     if (data?.todos.total && variables?.data.limit) {
-      ref.current += 8;
+      handleIncrementSkipValue(8);
       await fetchMore({
         variables: {
           data: {

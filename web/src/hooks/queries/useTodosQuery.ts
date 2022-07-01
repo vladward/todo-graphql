@@ -9,7 +9,7 @@ export const useTodosQuery = ({ ...options }) => {
       data: {
         ...options,
         limit: 4,
-        title: debouncedValue,
+        title: debouncedValue || undefined,
       },
     },
   });
